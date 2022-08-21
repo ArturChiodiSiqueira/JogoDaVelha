@@ -15,7 +15,6 @@ namespace JogoDaVelha
         {
             string opcao;
 
-
             do
             {
                 Console.Clear();
@@ -41,7 +40,7 @@ namespace JogoDaVelha
                 {
                     switch (opcao)
                     {
-                        case "0":// dps criar um metodo sair...
+                        case "0":
                             Console.WriteLine("vc escolheu sair");
                             break;
                         case "1":
@@ -56,6 +55,7 @@ namespace JogoDaVelha
         static void NovoJogo()
         {
             string opcao;
+            char[,] jogoDaVelha = new char[3, 3];
 
             do
             {
@@ -90,31 +90,96 @@ namespace JogoDaVelha
                 }
             } while (opcao != "0" && opcao != "1");
 
-            Jogadores();
             Console.Clear();
-            Tabuleiro();
-            string linha = "", coluna = "";
-            Jogada(linha, coluna);
-            // .
-            // .
-            // .
-        }
+            ImprimeTabuleiro(jogoDaVelha);
 
-        static void Jogadores()
-        {
-            string jogadorX, jogadorO;
+            Console.WriteLine("O primeiro jogador será representado por (X)");
+            Console.WriteLine("O segundo jogador será representado por  (O)\n");
 
-            Console.Write("Informe o apelido do jogador X: ");
-            jogadorX = Console.ReadLine();
-
-            Console.Write("Informe o apelido do jogador O: ");
-            jogadorO = Console.ReadLine();
+            Jogada();
 
         }
 
-        static void Tabuleiro()
+        static void Jogada()
         {
+            int contador = 0, linha, coluna;
+            bool verificador, verificaVitoria;
+            char x = 'X', o = 'O';
             char[,] jogoDaVelha = new char[3, 3];
+           
+
+            do
+            {
+                do
+                {
+                    Console.WriteLine("Jogador X:");
+                    linha = Linha();
+                    coluna = Coluna();
+
+                    if (VerificaPosicaoMatriz(linha, coluna, jogoDaVelha))
+                    {
+                        jogoDaVelha[linha, coluna] = x;
+                        Console.WriteLine("\tA ESCOLHA FOI: POSICAO [{0}, {1}] = {2}", linha, coluna, jogoDaVelha[linha, coluna]);
+                        Console.WriteLine();
+                        ImprimeTabuleiro(jogoDaVelha);
+                        
+                        contador++;
+                        verificador = false;
+                        verificaVitoria = Vitoria(jogoDaVelha, linha, coluna);
+                    }
+                    else
+                    {
+                        verificador = true;
+                        Console.WriteLine("posicao ocupada");
+                    }
+                } while (verificador);
+
+                if (contador == 5)
+                {
+                    DarVelha();
+                }
+                else if(contador < 5)
+                {
+                    do
+                    {
+                        Console.WriteLine("Jogador O:");
+                        linha = Linha();
+                        coluna = Coluna();
+
+                        if (VerificaPosicaoMatriz(linha, coluna, jogoDaVelha))
+                        {
+                            jogoDaVelha[linha, coluna] = o;
+
+                            Console.WriteLine("\tA ESCOLHA FOI: POSICAO [{0}, {1}] = {2}", linha, coluna, jogoDaVelha[linha, coluna]);
+                            Console.WriteLine();
+
+                            ImprimeTabuleiro(jogoDaVelha);
+
+                            verificador = false;
+
+                            verificaVitoria = Vitoria(jogoDaVelha, linha, coluna);
+                        }
+                        else
+                        {
+                            verificador = true;
+                            Console.WriteLine("posicao ocupada");
+                        }
+                    } while (verificador);
+                }
+
+            } while (contador < 5);
+        }
+
+        static bool VerificaPosicaoMatriz(int linha, int coluna, char[,] jogoDaVelha)
+        {
+            if (jogoDaVelha[linha, coluna] == 0)
+                return true;
+            else
+                return false;
+        }
+
+        static void ImprimeTabuleiro(char[,] jogoDaVelha)
+        {
             Console.WriteLine("");
             for (int linha = 0; linha < jogoDaVelha.GetLength(0); linha++)
             {
@@ -146,43 +211,108 @@ namespace JogoDaVelha
             Console.ReadKey();
         }
 
-        static void Empate()
+        static void DarVelha()
         {
+            Console.Clear();
             Console.WriteLine("o jogo empatou!");
+            Console.ReadKey();
         }
 
-        static void Jogada(string linha, string coluna)
+        static bool Vitoria(char[,] jogoDaVelha, int linha, int coluna)
         {
-            linha = Linha(linha);
-            coluna = Coluna(coluna);
+            bool vitoria = false;
+            // verificacao X -------------------------------------------------------------------------
+            // linhas
+            if (jogoDaVelha[linha, 0] == 'X' && jogoDaVelha[linha, 1] == 'X' && jogoDaVelha[linha, 2] == 'X')
+            {
+                GanhadorX();
+                vitoria = true;
+            }
+            // colunas
+            else if (jogoDaVelha[0, coluna] == 'X' && jogoDaVelha[1, coluna] == 'X' && jogoDaVelha[2, coluna] == 'X')
+            {
+                GanhadorX();
+                vitoria = true;
+            }
+            // diagonais
+            else if (jogoDaVelha[0, 0] == 'X' && jogoDaVelha[1, 1] == 'X' && jogoDaVelha[2, 2] == 'X')
+            {
+                GanhadorX();
+                vitoria = true;
+            }
+            else if (jogoDaVelha[2, 0] == 'X' && jogoDaVelha[1, 1] == 'X' && jogoDaVelha[0, 2] == 'X')
+            {
+                GanhadorX();
+                vitoria = true;
+            }
+            // verificacao O -------------------------------------------------------------------------
+            // linhas
+            if (jogoDaVelha[linha, 0] == 'O' && jogoDaVelha[linha, 1] == 'O' && jogoDaVelha[linha, 2] == 'O')
+            {
+                GanhadorO();
+                vitoria = true;
+            }
+            // colunas
+            else if (jogoDaVelha[0, coluna] == 'O' && jogoDaVelha[1, coluna] == 'O' && jogoDaVelha[2, coluna] == 'O')
+            {
+                GanhadorO();
+                vitoria = true;
+            }
+            // diagonais
+            else if (jogoDaVelha[0, 0] == 'O' && jogoDaVelha[1, 1] == 'O' && jogoDaVelha[2, 2] == 'O')
+            {
+                GanhadorO();
+                vitoria = true;
+            }
+            else if (jogoDaVelha[2, 0] == 'O' && jogoDaVelha[1, 1] == 'O' && jogoDaVelha[0, 2] == 'O')
+            {
+                GanhadorO();
+                vitoria = true;
+            }
+
+            return vitoria;
+        }
+        static void GanhadorX()
+        {
+            Console.WriteLine("Jogador X ganhou!");
+            Console.ReadKey();
+        }
+        static void GanhadorO()
+        {
+            Console.WriteLine("Jogador O ganhou!");
+            Console.ReadKey();
         }
 
-        static string Linha(string linha)
+        static int Linha()
         {
+            int linha;
+
             do
             {
                 Console.WriteLine("\tInforme a linha de sua escolha");
-                linha = Console.ReadLine();
-                if (linha != "0" && linha != "1" && linha != "2")
+                linha = int.Parse(Console.ReadLine());
+                if (linha != 0 && linha != 1 && linha != 2)
                 {
                     Console.WriteLine("'" + linha + "' é uma linha INVALIDA!");
                 }
-            } while (linha != "0" && linha != "1" && linha != "2");
+            } while (linha != 0 && linha != 1 && linha != 2);
 
             return linha;
         }
 
-        static string Coluna(string coluna)
+        static int Coluna()
         {
+            int coluna;
+
             do
             {
                 Console.WriteLine("\tInforme a coluna de sua escolha");
-                coluna = Console.ReadLine();
-                if (coluna != "0" && coluna != "1" && coluna != "2")
+                coluna = int.Parse(Console.ReadLine());
+                if (coluna != 0 && coluna != 1 && coluna != 2)
                 {
                     Console.WriteLine("'" + coluna + "' é uma coluna INVALIDA!");
                 }
-            } while (coluna != "0" && coluna != "1" && coluna != "2");
+            } while (coluna != 0 && coluna != 1 && coluna != 2);
 
             return coluna;
         }
