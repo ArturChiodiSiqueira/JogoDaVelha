@@ -29,7 +29,7 @@ namespace JogoDaVelha
        d88  888      88b       888  888 d8P  Y8b 888 888  88b      88b
        888  888 .d888888       Y88  88P 88888888 888 888  888 .d888888
        Y88b 888 888  888        Y8bd8P  Y8b.     888 888  888 888  888
-         Y88888  Y888888         Y88P    Y88888  888 888  888  Y888888:");
+         Y88888  Y888888:        Y88P    Y88888  888 888  888  Y888888:");
 
             Console.WriteLine("\n\n\nAperte [ENTER] para [INICIAR O JOGO]");
             Console.ReadKey();
@@ -144,7 +144,7 @@ namespace JogoDaVelha
             {
                 do
                 {
-                    Console.WriteLine("\tJogador X:");
+                    Console.WriteLine("\tJogador X!");
                     linha = Linha(); // chama funcao que pede linha
                     coluna = Coluna(); // chama funcao que pede coluna
 
@@ -173,7 +173,7 @@ namespace JogoDaVelha
                 {
                     do
                     {
-                        Console.WriteLine("\tJogador O:");
+                        Console.WriteLine("\tJogador O!");
                         linha = Linha(); // chama funcao que pede linha
                         coluna = Coluna(); // chama funcao que pede coluna
 
