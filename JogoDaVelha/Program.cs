@@ -5,7 +5,7 @@ namespace JogoDaVelha
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) // chamada do menu
         {
             Console.Title = "### JOGO DA VELHA ###";
 
@@ -38,7 +38,7 @@ namespace JogoDaVelha
             MenuPrincipal();
         }
 
-        static void MenuPrincipal()
+        static void MenuPrincipal() // funcao de criacao do menu, a partir dela o jogo é desenvolvido
         {
             string opcao;
 
@@ -80,7 +80,7 @@ namespace JogoDaVelha
             } while (opcao != "0");
         }
 
-        static void NovoJogo()
+        static void NovoJogo() // funçao para criar um novo jogo. pedindo as jogadas
         {
             string opcao;
             char[,] jogoDaVelha = new char[3, 3];
@@ -136,7 +136,7 @@ namespace JogoDaVelha
             Jogada();
         }
 
-        static void Jogada()
+        static void Jogada() // funcao que move o jogo ate que ele acabe, por vitoria ou empate
         {
             int contador = 0, linha, coluna, verificaVitoria = 0;
             bool verificadorPosicaoOcupada;
@@ -206,7 +206,7 @@ namespace JogoDaVelha
             } while (contador < 9 && verificaVitoria == 0); // enquanto nao atingiu o maximo de jogadas ainda (velha) ou ninguem ganhou o jogo ainda (vitoria). Passa a vez para o proximo jogador ate que de velha ou alguem ganhe
         }
 
-        static bool VerificaPosicaoMatriz(int linha, int coluna, char[,] jogoDaVelha)
+        static bool VerificaPosicaoMatriz(int linha, int coluna, char[,] jogoDaVelha) // retorna a disponibilidade de ocupacão da matriz
         {
             if (jogoDaVelha[linha, coluna] == 0)
                 return true;
@@ -214,7 +214,7 @@ namespace JogoDaVelha
                 return false;
         }
 
-        static void ImprimeTabuleiro(char[,] jogoDaVelha)
+        static void ImprimeTabuleiro(char[,] jogoDaVelha) // imprime o tabuleiro
         {
             Console.WriteLine();
 
@@ -249,7 +249,7 @@ namespace JogoDaVelha
             Console.ReadKey();
         }
 
-        static void DarVelha() // a velha so acontece depois que o X joga pois é ele quem começa e termina o jogo, 5 jogadas
+        static void DarVelha() // verifica empate, a velha so acontece depois que o X joga pois é ele quem começa e termina o jogo, 5 jogadas
         {
             Console.Clear();
 
@@ -270,7 +270,7 @@ namespace JogoDaVelha
             Console.ReadKey();
         }
 
-        static int Vitoria(char[,] jogoDaVelha, int linha, int coluna)
+        static int Vitoria(char[,] jogoDaVelha, int linha, int coluna) // funçao que verifica as vitorias possiveis e retorna caso de vitoria
         {
             int vitoria = 0;
             // verificacao X -------------------------------------------------------------------------
@@ -331,7 +331,8 @@ namespace JogoDaVelha
             }
             return vitoria;
         }
-        static void GanhadorX()
+
+        static void GanhadorX() // imprime o ganhador X
         {
             Console.Clear();
 
@@ -362,7 +363,8 @@ namespace JogoDaVelha
             Console.WriteLine("\n\n\n\tAperte [ENTER] para voltar ao [MENU PRINCIPAL]");
             Console.ReadKey();
         }
-        static void GanhadorO()
+
+        static void GanhadorO() // imprime o ganhador O
         {
             Console.Clear();
 
@@ -394,7 +396,7 @@ namespace JogoDaVelha
             Console.ReadKey();
         }
 
-        static int Linha()
+        static int Linha() // funçao para pedir a linha para o usuario
         {
             int linha;
 
@@ -411,7 +413,7 @@ namespace JogoDaVelha
             return linha;
         }
 
-        static int Coluna()
+        static int Coluna() // funçao para pedir a coluna para o usuario
         {
             int coluna;
 
