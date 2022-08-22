@@ -163,7 +163,7 @@ namespace JogoDaVelha
 
                         verificaVitoria = Vitoria(jogoDaVelha, linha, coluna); // verifica se alguem ganhou (caso vitoria, verificaVitoria = 1)
                     }
-                    
+
                     else
                     {
                         verificadorPosicaoOcupada = true;
