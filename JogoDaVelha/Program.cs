@@ -10,6 +10,7 @@ namespace JogoDaVelha
             Console.Title = "### JOGO DA VELHA ###";
 
             Console.WriteLine();
+
             Console.WriteLine(@"
                          d8b                                           
                          Y8P                                           
@@ -31,8 +32,9 @@ namespace JogoDaVelha
        Y88b 888 888  888        Y8bd8P  Y8b.     888 888  888 888  888
          Y88888  Y888888:        Y88P    Y88888  888 888  888  Y888888:");
 
-            Console.WriteLine("\n\n\nAperte [ENTER] para [INICIAR O JOGO]");
+            Console.WriteLine("\n\n\n\t\t      Aperte [ENTER] para [INICIAR O JOGO]");
             Console.ReadKey();
+
             MenuPrincipal();
         }
 
@@ -44,20 +46,20 @@ namespace JogoDaVelha
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\nDENTRE AS OPÇÕES NO MENU, QUAL DESEJA EXECUTAR?");
+                Console.WriteLine("\nDENTRE AS OPÇÕES NO MENU, QUAL DESEJA EXECUTAR?\n");
                 Console.WriteLine("\t|°°°° MENU  PRINCIPAL °°°°|");
                 Console.WriteLine("\t|   opção 0 : sair        |");
                 Console.WriteLine("\t|                         |");
                 Console.WriteLine("\t|   opção 1 : novo jogo   |");
                 Console.WriteLine("\t|_________________________|");
 
-                Console.Write("\nInforme a opcao: ");
+                Console.Write("\n\tInforme a opcao: ");
                 opcao = Console.ReadLine();
                 Console.Beep();
 
                 if (opcao != "0" && opcao != "1")
                 {
-                    Console.WriteLine("'" + opcao + "' é uma opcao INVALIDA! Para voltar ao menu, pressione QUALQUER TECLA!");
+                    Console.WriteLine("'" + opcao + "' é uma opcao INVALIDA! Para voltar ao MENU, pressione QUALQUER TECLA!");
                     Console.ReadKey();
                     Console.Clear();
                 }
@@ -67,7 +69,7 @@ namespace JogoDaVelha
                     switch (opcao)
                     {
                         case "0":
-                            Console.WriteLine("vc escolheu sair");
+                            Console.WriteLine("\nVOCÊ ESCOLHEU SAIR.");
                             break;
                         case "1":
                             Console.Clear();
@@ -97,7 +99,7 @@ namespace JogoDaVelha
 
                 if (opcao != "0" && opcao != "1")
                 {
-                    Console.WriteLine("'" + opcao + "' é uma opcao INVALIDA! Para voltar ao menu, pressione QUALQUER TECLA!");
+                    Console.WriteLine("'" + opcao + "' é uma opcao INVALIDA! Para voltar ao MENU, pressione QUALQUER TECLA!");
                     Console.ReadKey();
                     Console.Clear();
                 }
@@ -119,9 +121,12 @@ namespace JogoDaVelha
 
             Console.Clear();
             Console.WriteLine("\t\t          O TABULEIRO ESTÁ VAZIO\n");
+
             ImprimeTabuleiro(jogoDaVelha);
+
             Console.Clear();
 
+            Console.WriteLine("O jogo está prestes a iniciar! Prepare-se!\n");
             Console.WriteLine("O primeiro jogador será representado por (X)");
             Console.WriteLine("O segundo jogador será representado por  (O)\n");
             Console.WriteLine("\nAperte [ENTER] para continuar");
@@ -129,7 +134,6 @@ namespace JogoDaVelha
             Console.Clear();
 
             Jogada();
-
         }
 
         static void Jogada()
@@ -138,7 +142,6 @@ namespace JogoDaVelha
             bool verificadorPosicaoOcupada;
             char x = 'X', o = 'O';
             char[,] jogoDaVelha = new char[3, 3];
-
 
             do
             {
@@ -155,9 +158,12 @@ namespace JogoDaVelha
                         ImprimeTabuleiro(jogoDaVelha);
 
                         contador++; // conta as jogadas do X (maximo de 5 pois é o primeiro a jogar)
+
                         verificadorPosicaoOcupada = false; // recebe "false" pois nao estava ocupada
+
                         verificaVitoria = Vitoria(jogoDaVelha, linha, coluna); // verifica se alguem ganhou (caso vitoria, verificaVitoria = 1)
                     }
+                    
                     else
                     {
                         verificadorPosicaoOcupada = true;
@@ -184,7 +190,9 @@ namespace JogoDaVelha
                             ImprimeTabuleiro(jogoDaVelha);
 
                             contador++; // conta as jogadas do O (maximo de 4 pois é o segundo a jogar)
+
                             verificadorPosicaoOcupada = false; // como a posicao estava livre, deve sair do laço e recebe falso para poder sair do laço
+
                             verificaVitoria = Vitoria(jogoDaVelha, linha, coluna); // verifica se alguem ganhou (caso vitoria, verificaVitoria = 1)
                         }
                         else
@@ -208,7 +216,8 @@ namespace JogoDaVelha
 
         static void ImprimeTabuleiro(char[,] jogoDaVelha)
         {
-            Console.WriteLine("");
+            Console.WriteLine();
+
             for (int linha = 0; linha < jogoDaVelha.GetLength(0); linha++)
             {
                 if (linha != 2)
@@ -235,7 +244,7 @@ namespace JogoDaVelha
                 }
             }
 
-            Console.WriteLine("\n\n\t\t      Aperte [ENTER] para continuar\n");
+            Console.WriteLine("\n\n\n\t\t      Aperte [ENTER] para continuar\n");
             Console.Beep();
             Console.ReadKey();
         }
@@ -243,6 +252,7 @@ namespace JogoDaVelha
         static void DarVelha() // a velha so acontece depois que o X joga pois é ele quem começa e termina o jogo, 5 jogadas
         {
             Console.Clear();
+
             Console.WriteLine(@"
 8888888888 888b     d888 8888888b.     d8888 88888888888 8888888888    888 
 888        8888b   d8888 888   Y88b   d88888     888     888           888 
@@ -324,6 +334,7 @@ namespace JogoDaVelha
         static void GanhadorX()
         {
             Console.Clear();
+
             Console.WriteLine(@"
        888     888 8888888 88888888888 .d88888b.  8888888b.  8888888        d8888                    
        888     888   888       888    d88P° °Y88b 888   Y88b   888         d88888                    
@@ -348,12 +359,13 @@ namespace JogoDaVelha
  .d88P'                                                                                              
 888P'                                                                                                ");
 
-            Console.WriteLine("\n\n\nAperte [ENTER] para voltar ao [MENU PRINCIPAL]");
+            Console.WriteLine("\n\n\n\tAperte [ENTER] para voltar ao [MENU PRINCIPAL]");
             Console.ReadKey();
         }
         static void GanhadorO()
         {
             Console.Clear();
+
             Console.WriteLine(@"
        888     888 8888888 88888888888 .d88888b.  8888888b.  8888888        d8888                    
        888     888   888       888    d88P° °Y88b 888   Y88b   888         d88888                    
@@ -378,7 +390,7 @@ namespace JogoDaVelha
  .d88P'                                                                                              
 888P'                                                                                                ");
 
-            Console.WriteLine("\n\n\nAperte [ENTER] para voltar ao [MENU PRINCIPAL]");
+            Console.WriteLine("\n\n\n\tAperte [ENTER] para voltar ao [MENU PRINCIPAL]");
             Console.ReadKey();
         }
 
@@ -390,10 +402,10 @@ namespace JogoDaVelha
             {
                 Console.Write("\tInforme a linha de sua escolha:  ");
                 linha = int.Parse(Console.ReadLine());
+
                 if (linha != 0 && linha != 1 && linha != 2)
-                {
                     Console.WriteLine("\t'" + linha + "' é uma linha INVALIDA!");
-                }
+
             } while (linha != 0 && linha != 1 && linha != 2);
 
             return linha;
@@ -407,10 +419,10 @@ namespace JogoDaVelha
             {
                 Console.Write("\tInforme a coluna de sua escolha: ");
                 coluna = int.Parse(Console.ReadLine());
+
                 if (coluna != 0 && coluna != 1 && coluna != 2)
-                {
                     Console.WriteLine("\t'" + coluna + "' é uma coluna INVALIDA!");
-                }
+
             } while (coluna != 0 && coluna != 1 && coluna != 2);
 
             return coluna;
