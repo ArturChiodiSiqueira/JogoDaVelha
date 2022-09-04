@@ -89,7 +89,7 @@ namespace JogoDaVelha
             {
                 Console.WriteLine();
                 Console.WriteLine("\t|°°°°°° NOVO  JOGO °°°°°°|");
-                Console.WriteLine("\t|   opção 0 : colirido   |");
+                Console.WriteLine("\t|   opção 0 : colorido   |");
                 Console.WriteLine("\t|                        |");
                 Console.WriteLine("\t|   opção 1 : padrão     |");
                 Console.WriteLine("\t|________________________|");
